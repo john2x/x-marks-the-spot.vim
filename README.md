@@ -4,9 +4,9 @@ Vim marks for humans.
 
 Basic usage
 -----------
-- `<C-d>`: Add mark `x` in the current cursor location, where `x` is the next
+- `<leader>x`: Add mark `x` in the current cursor location, where `x` is the next
 available mark.
-- `<C-D>`: Delete the mark at the current line.
+- `<leader>X`: Delete all marks at the current line.
 - `<BS>`: Go to the previous closest mark (mode 1) or the previously
 assigned mark (mode 2).
 - `<S-BS>`: Go to next closest mark (mode 1) or the next assigned mark

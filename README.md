@@ -14,6 +14,8 @@ assigned mark (mode 2).
 
 Modes
 -----
+(Not yet implemented)
+
 - **Mode 1**: mark navigation by position
 - **Mode 2**: mark navigation by time assigned
 

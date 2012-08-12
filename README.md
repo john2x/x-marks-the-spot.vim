@@ -17,8 +17,7 @@ Options
 
 To set options, set their values in your vimrc.
 
-X_MARKS_NAVIGATION_MODE
-~~~~~~~~~~~~~~~~~~~~~~~
+### X_MARKS_NAVIGATION_MODE
 
 Switch between two mark navigation modes. 
 
@@ -28,8 +27,7 @@ Basically just calls `['` and `]'` for moving backward and forward, respectively
 - `let g:X_MARKS_NAVIGATION_MODE = 2` - Move through marks based on the order of
 their assignment, regardless of their positions.
 
-X_MARKS_RESET_MARKS_ON_BUF_READ
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+### X_MARKS_RESET_MARKS_ON_BUF_READ
 
 - `let g:X_MARKS_RESET_MARKS_ON_BUF_READ = 0` - (default) Don't clear all buffer
 marks when initializing X Marks The Spot for the current buffer.

@@ -10,7 +10,7 @@ available mark.
 - `<BS>`: Go to the previous closest mark (mode 1) or the previously
 assigned mark (mode 2).
 - `<S-BS>`: Go to next closest mark (mode 1) or the next assigned mark
-(mark 2).
+(mode 2).
 
 Options
 -------

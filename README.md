@@ -37,6 +37,12 @@ marks when initializing X Marks The Spot for the current buffer.
 - `let g:X_MARKS_RESET_MARKS_ON_BUF_READ = 1` - Clear all buffer
 marks when initializing X Marks The Spot for the current buffer.
 
+To Do List
+----------
+
+1. Allow mode 1 to "cycle" to the first/last mark when at the last/first mark.
+2. Add an option to limit one mark per line.
+
 License
 -------
 

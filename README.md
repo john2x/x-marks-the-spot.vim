@@ -42,6 +42,7 @@ To Do List
 
 1. Allow mode 1 to "cycle" to the first/last mark when at the last/first mark.
 2. Add an option to limit one mark per line.
+3. Don't store marks in a dict anymore.
 
 License
 -------

@@ -4,61 +4,68 @@ if exists("g:loaded_x_marks_the_spot")
 	finish
 endif
 
-if !exists("g:X_MARKS_THE_SPOT_MODE")
-	let g:X_MARKS_THE_SPOT_MODE = 2
+if !exists("g:X_MARKS_NAVIGATION_MODE")
+	let g:X_MARKS_NAVIGATION_MODE = 1
+endif
+if !exists("g:X_MARKS_RESET_MARKS_ON_BUF_READ")
+	let g:X_MARKS_RESET_MARKS_ON_BUF_READ = 0
 endif
 let g:loaded_x_marks_the_spot = 1
 let s:ALLOWED_MARKS = "a b c d e f g h i j k l m n o p q r s t u v w x y z"
 
-function! s:InitVariables()
-	if !exists("b:last_visited_mark")
+function! ResetXMarksOnBuffer()
+	call InitializeVariables(0)
+endfunction
+
+function! InitializeVariables(auto)
+	if !a:auto
+		echom "Initializing X Marks The Spot on current buffer..."
+	endif
+	if exists("g:X_MARKS_RESET_MARKS_ON_BUF_READ") && g:X_MARKS_RESET_MARKS_ON_BUF_READ
+		execute "delmarks!"
+	endif
+	if !exists("b:last_visited_mark") || !a:auto
 		let b:last_visited_mark = ""
 	endif
-	if !exists("b:next_available_mark")
+	if !exists("b:next_available_mark") || !a:auto
 		let b:next_available_mark = "a"
 	endif
-	if !exists("b:assigned_marks")
-		echom "Initializing assigned_marks"
+	if !exists("b:assigned_marks") || !a:auto
 		let b:assigned_marks = {}
 		let l:allowedmarks = split(s:ALLOWED_MARKS, " ")
-		echom join(l:allowedmarks, ",")
-		for i in l:allowedmarks
-			echom i
-			let l:pos = getpos("'" . i)
-			echom join(l:pos, ",")
+		for marc in l:allowedmarks
+			let l:pos = getpos("'" . marc)
 			if l:pos[1] > 0 && l:pos[2] > 0
-				let b:assigned_marks[i] = l:pos[1:2]
-				let b:last_visited_mark = i
-				let b:next_available_mark = <SID>GetNextChar(i)
+				let b:assigned_marks[marc] = l:pos[1:2]
+				let b:last_visited_mark = marc
+				let b:next_available_mark = <SID>GetNextChar(marc)
 			endif
 		endfor
 	endif
-	echom "End Initializing"
-	echo b:assigned_marks
 endfunction
 
 function! s:GotoPreviousMark()
-	if g:X_MARKS_THE_SPOT_MODE == 1
+	if g:X_MARKS_NAVIGATION_MODE == 1
 		execute "normal! ['"
-	elseif g:X_MARKS_THE_SPOT_MODE == 2
+	elseif g:X_MARKS_NAVIGATION_MODE == 2
 		let l:prev_mark = <SID>GetPreviousMark()
 		if l:prev_mark !=# "0"
 			execute "normal! '" . l:prev_mark
 			let b:last_visited_mark = l:prev_mark
-			echo "GotoPreviousMark " . l:prev_mark
+			echo "Jumped to mark '" . l:prev_mark . "'"
 		endif
 	endif
 endfunction
 
 function! s:GotoNextMark()
-	if g:X_MARKS_THE_SPOT_MODE == 1
+	if g:X_MARKS_NAVIGATION_MODE == 1
 		execute "normal! ]'"
-	elseif g:X_MARKS_THE_SPOT_MODE == 2
+	elseif g:X_MARKS_NAVIGATION_MODE == 2
 		let l:next_mark = <SID>GetNextMark()
 		if l:next_mark !=# "0"
 			execute "normal! '" . l:next_mark
 			let b:last_visited_mark = l:next_mark
-			echo "GotoPreviousMark " . l:next_mark
+			echo "Jumped to mark '" . l:next_mark . "'"
 		endif
 	endif
 endfunction
@@ -66,11 +73,11 @@ endfunction
 function! s:AddMarkOnLine()
 	let l:next_mark = <SID>GetNextAvailableMark()
 	execute "normal! m" . next_mark
-	let l:mark_pos = getpos("'" . next_mark)[1:2]
+	let l:mark_pos = getpos("'" . l:next_mark)[1:2]
 	let b:assigned_marks[next_mark] = l:mark_pos
 	let b:next_available_mark = l:next_mark
 	let b:last_visited_mark = l:next_mark
-	echo b:assigned_marks
+	echo "Assigned mark '" . l:next_mark . "' at line " . l:mark_pos[0]
 endfunction
 
 function! s:RemoveMarksOnLine()
@@ -146,7 +153,7 @@ endfunction
 
 augroup x_marks_the_spot_augroup
 	autocmd!
-	autocmd BufAdd,BufEnter,BufNew,BufNewFile,BufRead * call <SID>InitVariables()
+	autocmd BufRead * call InitializeVariables(1)
 augroup END
 
 " Mappings

@@ -4,6 +4,8 @@ Vim marks for pirates. Arr!
 
 Basic usage
 -----------
+Default mappings:
+
 - `<leader>x`: Add mark `x` in the current cursor location, where `x` is the next
 available mark.
 - `<leader>X`: Delete all marks at the current line.

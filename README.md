@@ -36,3 +36,9 @@ marks when initializing X Marks The Spot for the current buffer.
 
 - `let g:X_MARKS_RESET_MARKS_ON_BUF_READ = 1` - Clear all buffer
 marks when initializing X Marks The Spot for the current buffer.
+
+License
+-------
+
+Copyright (c) John Louis Del Rosario. Distributed under the same terms as Vim
+itself. See `:help license`.

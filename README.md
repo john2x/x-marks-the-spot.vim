@@ -32,5 +32,5 @@ their assignment, regardless of their positions.
 - `let g:X_MARKS_RESET_MARKS_ON_BUF_READ = 0` - (default) Don't clear all buffer
 marks when initializing X Marks The Spot for the current buffer.
 
-- `let g:X_MARKS_RESET_MARKS_ON_BUF_READ = 0` - (default) Clear all buffer
+- `let g:X_MARKS_RESET_MARKS_ON_BUF_READ = 1` - Clear all buffer
 marks when initializing X Marks The Spot for the current buffer.

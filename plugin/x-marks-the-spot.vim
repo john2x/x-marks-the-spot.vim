@@ -71,6 +71,10 @@ function! s:GotoNextMark()
 endfunction
 
 function! s:AddMarkOnLine()
+	if <SID>IsLineMarked(getpos(".")[1])
+		echo "Line already marked. "
+		return
+	endif
 	let l:next_mark = <SID>GetNextAvailableMark()
 	execute "normal! m" . next_mark
 	let l:mark_pos = getpos("'" . l:next_mark)[1:2]
@@ -78,6 +82,15 @@ function! s:AddMarkOnLine()
 	let b:next_available_mark = l:next_mark
 	let b:last_visited_mark = l:next_mark
 	echo "Assigned mark '" . l:next_mark . "' at line " . l:mark_pos[0]
+endfunction
+
+function! s:IsLineMarked(lnum)
+	for l:marc in items(b:assigned_marks)
+		if l:marc[1][0] == a:lnum
+			return 1
+		endif
+	endfor
+	return 0
 endfunction
 
 function! s:RemoveMarksOnLine()

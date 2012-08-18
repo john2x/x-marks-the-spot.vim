@@ -2,6 +2,8 @@ X Marks The Spot
 ================
 Vim marks for pirates. Arr!
 
+Easy mappings for creating and navigating through lower-case marks.
+
 Basic usage
 -----------
 Default mappings:
@@ -26,9 +28,9 @@ Options
 
 To set options, set their values in your vimrc.
 
-### X_MARKS_NAVIGATION_MODE
+### X\_MARKS\_NAVIGATION\_MODE
 
-Switch between two mark navigation modes. 
+Choose between two mark navigation modes. 
 
 - `let g:X_MARKS_NAVIGATION_MODE = 1` - (default) Move through marks based on position.
 Basically just calls `['` and `]'` for moving backward and forward, respectively.
@@ -36,7 +38,7 @@ Basically just calls `['` and `]'` for moving backward and forward, respectively
 - `let g:X_MARKS_NAVIGATION_MODE = 2` - Move through marks based on the order of
 their assignment, regardless of their positions.
 
-### X_MARKS_RESET_MARKS_ON_BUF_READ
+### X\_MARKS\_RESET\_MARKS\_ON\_BUF\_READ
 
 - `let g:X_MARKS_RESET_MARKS_ON_BUF_READ = 0` - (default) Don't clear all buffer
 marks when initializing X Marks The Spot for the current buffer.

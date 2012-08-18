@@ -1,5 +1,6 @@
 " X Marks the Spot
 " Vim marks for pirates. Arr!
+" Easy mappings for creating and navigating through lower-case marks.
 " Last Change: 2012 Aug 18
 " Maintainer: John Louis Del Rosario <john2x@gmail.com>
 " Repository: https://github.com/john2x/x-marks-the-spot
@@ -21,10 +22,10 @@ let g:loaded_x_marks_the_spot = 1
 let s:ALLOWED_MARKS = "a b c d e f g h i j k l m n o p q r s t u v w x y z"
 
 function! ResetXMarksOnBuffer()
-	call InitializeVariables(0)
+	call <SID>InitializeVariables(0)
 endfunction
 
-function! InitializeVariables(auto)
+function! s:InitializeVariables(auto)
 	if !a:auto
 		echom "Initializing X Marks The Spot on current buffer..."
 	endif
@@ -173,7 +174,7 @@ endfunction
 
 augroup x_marks_the_spot_augroup
 	autocmd!
-	autocmd BufRead * call InitializeVariables(1)
+	autocmd BufRead * call <SID>InitializeVariables(1)
 augroup END
 
 " Mappings

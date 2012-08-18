@@ -1,3 +1,10 @@
+" X Marks the Spot
+" Vim marks for pirates. Arr!
+" Last Change: 2012 Aug 18
+" Maintainer: John Louis Del Rosario <john2x@gmail.com>
+" Repository: https://github.com/john2x/x-marks-the-spot
+" License: See `License` section in the file README.md
+
 let s:X_MARKS_THE_SPOT_VERSION = "0.0.1"
 
 if exists("g:loaded_x_marks_the_spot")
@@ -170,10 +177,26 @@ augroup x_marks_the_spot_augroup
 augroup END
 
 " Mappings
-"
-nnoremap <leader>x :call <SID>AddMarkOnLine()<cr>
-nnoremap <leader>X :call <SID>RemoveMarksOnLine()<cr>
 
-nnoremap <silent> <BS> :call <SID>GotoPreviousMark()<cr>
-nnoremap <silent> <S-BS> :call <SID>GotoNextMark()<cr>
+if !hasmapto('<Plug>XmarksthespotAddmark')
+	nmap <unique> <leader>x <Plug>XmarksthespotAddmark
+endif
+if !hasmapto('<Plug>XmarksthespotRemovemarks')
+	nmap <unique> <leader>X <Plug>XmarksthespotRemovemarks
+endif
+if !hasmapto('<Plug>XmarksthespotNextmark')
+	nmap <unique> <S-BS> <Plug>XmarksthespotNextmark
+endif
+if !hasmapto('<Plug>XmarksthespotPreviousmark')
+	nmap <unique> <BS> <Plug>XmarksthespotPreviousmark
+endif
+
+nnoremap <unique> <script> <Plug>XmarksthespotAddmark <SID>AddMarkOnLine
+nnoremap <unique> <script> <Plug>XmarksthespotRemovemarks <SID>RemoveMarksOnLine
+nnoremap <unique> <script> <Plug>XmarksthespotNextmark <SID>GotoNextMark
+nnoremap <unique> <script> <Plug>XmarksthespotPreviousmark <SID>GotoPreviousMark
+nnoremap <SID>AddMarkOnLine :call <SID>AddMarkOnLine()<cr>
+nnoremap <SID>RemoveMarksOnLine :call <SID>RemoveMarksOnLine()<cr>
+nnoremap <silent> <SID>GotoPreviousMark :call <SID>GotoPreviousMark()<cr>
+nnoremap <silent> <SID>GotoNextMark :call <SID>GotoNextMark()<cr>
 

@@ -14,6 +14,13 @@ assigned mark (mode 2).
 - `<S-BS>`: Go to next closest mark (mode 1) or the next assigned mark
 (mode 2).
 
+To override them, add the following to your vimrc:
+
+	nmap <unique> <leader>x <Plug>XmarksthespotAddmark
+	nmap <unique> <leader>X <Plug>XmarksthespotRemovemarks
+	nmap <unique> <S-BS> <Plug>XmarksthespotNextmark
+	nmap <unique> <BS> <Plug>XmarksthespotPreviousmark
+
 Options
 -------
 
@@ -41,8 +48,9 @@ To Do List
 ----------
 
 1. Allow mode 1 to "cycle" to the first/last mark when at the last/first mark.
-2. Add an option to limit one mark per line.
+2. Add an option to limit one mark per line. (DONE)
 3. Don't store marks in a dict anymore.
+4. Show signs for marks.
 
 License
 -------

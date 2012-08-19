@@ -66,6 +66,7 @@ To Do List
 2. Add an option to limit one mark per line. (DONE)
 3. Don't store marks in a dict anymore.
 4. Show signs for marks.
+5. Make it work with normal mark creation (e.g. `ma`, etc.)
 
 License
 -------

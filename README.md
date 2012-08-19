@@ -46,6 +46,14 @@ marks when initializing X Marks The Spot for the current buffer.
 - `let g:X_MARKS_RESET_MARKS_ON_BUF_READ = 1` - Clear all buffer
 marks when initializing X Marks The Spot for the current buffer.
 
+### X\_MARKS\_SHOW\_SIGNS
+
+(Experimental)
+
+- `let g:X_MARKS_SHOW_SIGNS = 0` - Don't show signs for mark location
+
+- `let g:X_MARKS_SHOW_SIGNS = 1` - (default) Show signs for mark location
+
 To Do List
 ----------
 

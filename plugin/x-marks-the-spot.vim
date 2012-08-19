@@ -18,14 +18,17 @@ endif
 if !exists("g:X_MARKS_RESET_MARKS_ON_BUF_READ")
 	let g:X_MARKS_RESET_MARKS_ON_BUF_READ = 0
 endif
+if !exists("g:X_MARKS_SHOW_SIGNS")
+	let g:X_MARKS_SHOW_SIGNS = 1
+endif
 let g:loaded_x_marks_the_spot = 1
 let s:ALLOWED_MARKS = "a b c d e f g h i j k l m n o p q r s t u v w x y z"
 
 function! ResetXMarksOnBuffer()
-	call <SID>InitializeVariables(0)
+	call <SID>Initialize(0)
 endfunction
 
-function! s:InitializeVariables(auto)
+function! s:Initialize(auto)
 	if !a:auto
 		echom "Initializing X Marks The Spot on current buffer..."
 	endif
@@ -38,15 +41,21 @@ function! s:InitializeVariables(auto)
 	if !exists("b:next_available_mark") || !a:auto
 		let b:next_available_mark = "a"
 	endif
+	let l:allowedmarks = split(s:ALLOWED_MARKS, " ")
 	if !exists("b:assigned_marks") || !a:auto
 		let b:assigned_marks = {}
-		let l:allowedmarks = split(s:ALLOWED_MARKS, " ")
-		for marc in l:allowedmarks
-			let l:pos = getpos("'" . marc)
+		for l:marc in l:allowedmarks
+			" Define sign
+			execute "sign define xmarks_" . l:marc . " text=" . l:marc
+			let l:pos = getpos("'" . l:marc)
 			if l:pos[1] > 0 && l:pos[2] > 0
 				let b:assigned_marks[marc] = l:pos[1:2]
-				let b:last_visited_mark = marc
-				let b:next_available_mark = <SID>GetNextChar(marc)
+				let b:last_visited_mark = l:marc
+				let b:next_available_mark = <SID>GetNextChar(l:marc)
+				if g:X_MARKS_SHOW_SIGNS
+					" Place sign
+					call <SID>AddSign(l:marc, l:pos[1])
+				endif
 			endif
 		endfor
 	endif
@@ -89,6 +98,10 @@ function! s:AddMarkOnLine()
 	let b:assigned_marks[next_mark] = l:mark_pos
 	let b:next_available_mark = l:next_mark
 	let b:last_visited_mark = l:next_mark
+	if g:X_MARKS_SHOW_SIGNS
+		" Add sign
+		call <SID>AddSign(l:next_mark, l:mark_pos[0])
+	endif
 	echo "Assigned mark '" . l:next_mark . "' at line " . l:mark_pos[0]
 endfunction
 
@@ -118,6 +131,10 @@ function! s:RemoveMarksOnLine()
 		for l:marc in split(l:deleted_marks, " ")
 			unlet b:assigned_marks[l:marc]
 		endfor
+		if g:X_MARKS_SHOW_SIGNS
+			" remove sign
+			call <SID>RemoveSign(l:lnum)
+		endif
 	else
 		echom "No marks on line " . l:lnum
 	endif
@@ -172,9 +189,17 @@ function! s:GetPrevChar(char)
 	return l:prev_char
 endfunction
 
+function! s:AddSign(name, lnum)
+	execute "sign place " . a:lnum . " line=" . a:lnum . " name=xmarks_" . a:name . " buffer=" . bufnr("%")
+endfunction
+
+function! s:RemoveSign(signid)
+	execute "sign unplace " . a:signid . " buffer=" . bufnr("%")
+endfunction
+
 augroup x_marks_the_spot_augroup
 	autocmd!
-	autocmd BufRead * call <SID>InitializeVariables(1)
+	autocmd BufRead * call <SID>Initialize(1)
 augroup END
 
 " Mappings

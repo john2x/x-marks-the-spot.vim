@@ -23,6 +23,11 @@ To override them, add the following to your vimrc:
 	nmap <unique> <S-BS> <Plug>XmarksthespotNextmark
 	nmap <unique> <BS> <Plug>XmarksthespotPreviousmark
 
+Install
+-------
+
+Just place in your `.vim/plugins` directory. Pathogen ready.
+
 Options
 -------
 

@@ -63,7 +63,7 @@ To Do List
 ----------
 
 1. Allow mode 1 to "cycle" to the first/last mark when at the last/first mark. (DONE)
-2. Add an option to limit one mark per line. (DONE)
+2. Add an option to limit one mark per line. (DONE, but not an option)
 3. Don't store marks in a dict anymore.
 4. Show signs for marks. (DONE)
 5. Make it work with normal mark creation (e.g. `ma`, etc.)

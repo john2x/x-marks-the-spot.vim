@@ -41,7 +41,7 @@ Choose between two mark navigation modes.
 Basically just calls `['` and `]'` for moving backward and forward, respectively.
 
 - `let g:X_MARKS_NAVIGATION_MODE = 2` - Move through marks based on the order of
-their assignment, regardless of their positions.
+their assignment (i.e. in alphabetical order), regardless of their positions.
 
 ### X\_MARKS\_RESET\_MARKS\_ON\_BUF\_READ
 

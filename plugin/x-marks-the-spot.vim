@@ -66,7 +66,7 @@ function! s:GotoPreviousMark()
 		let l:lnum = getpos(".")[1]
 		execute "normal! ['"
 		if l:lnum == getpos(".")[1]
-			execute "normal! G['"
+			execute "normal! G['zz"
 		endif
 	elseif g:X_MARKS_NAVIGATION_MODE == 2
 		let l:prev_mark = <SID>GetPreviousMark()
@@ -83,7 +83,7 @@ function! s:GotoNextMark()
 		let l:lnum = getpos(".")[1]
 		execute "normal! ]'"
 		if l:lnum == getpos(".")[1]
-			execute "normal! gg]'"
+			execute "normal! gg]'zz"
 		endif
 	elseif g:X_MARKS_NAVIGATION_MODE == 2
 		let l:next_mark = <SID>GetNextMark()

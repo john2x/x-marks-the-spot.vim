@@ -28,6 +28,17 @@ function! ResetXMarksOnBuffer()
 	call <SID>Initialize(0)
 endfunction
 
+function! ClearXMarks()
+	echom "Clearing all marks"
+	execute "delmarks!"
+	if g:X_MARKS_SHOW_SIGNS
+		for l:marc in keys(b:assigned_marks)
+			execute "sign unplace " . b:assigned_marks[l:marc][0] . " buffer=" . bufnr("%")
+		endfor
+	endif
+	call <SID>Initialize(0)
+endfunction
+
 function! s:Initialize(auto)
 	if !a:auto
 		echom "Initializing X Marks The Spot on current buffer..."

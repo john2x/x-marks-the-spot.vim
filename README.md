@@ -8,7 +8,7 @@ Basic usage
 -----------
 Default mappings:
 
-- `<leader>x`: Add mark `x` in the current cursor location, where `x` is the next
+- `<leader>x`: Add mark `y` in the current cursor location, where `y` is the next
 available mark.
 - `<leader>X`: Delete all marks at the current line.
 - `<BS>`: Go to the previous closest mark (mode 1) or the previously
@@ -58,6 +58,12 @@ marks when initializing X Marks The Spot for the current buffer.
 - `let g:X_MARKS_SHOW_SIGNS = 0` - Don't show signs for mark location
 
 - `let g:X_MARKS_SHOW_SIGNS = 1` - (default) Show signs for mark location
+
+Utility Functions
+-----------------
+
+- `:call ResetXMarksOnBuffer()` - Use this when X Marks the Spot messes up (e.g. when you add a mark via `mx`, etc.)
+- `:call ClearXMarks()` - Clear all marks and signs (`:delmarks` doesn't work yet :()
 
 To Do List
 ----------
